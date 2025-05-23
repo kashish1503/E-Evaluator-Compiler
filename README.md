@@ -1,5 +1,5 @@
 
-***Expression Evaluator***
+<h1>Expression Evaluator</h1>
 
 This project implements an Expression Evaluator for a simple language called E++, focusing on arithmetic expressions involving rational numbers with unlimited precision. It incorporates parsing, symbolic evaluation, and storage of variables using key data structures and algorithms.
 
