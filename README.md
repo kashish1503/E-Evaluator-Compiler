@@ -66,8 +66,8 @@ A class built on `UnlimitedInt`:
 - Ensures correct tree construction and evaluation logic.
 
 ## Example Usage
-x := (13 + (2 / (2 / 51))) 
-y := ((x * 4) - (7 / 3))
+- x := `(13 + (2 / (2 / 51)))` 
+- y := `((x * 4) - (7 / 3))`
 
 These expressions are tokenized, parsed into trees, evaluated using `UnlimitedRational`, and stored in the symbol table.
 
