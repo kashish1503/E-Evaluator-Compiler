@@ -1,78 +1,82 @@
-# Expression Evaluator
+# E++ Expression Evaluator & Compiler
 
-This project implements an **Expression Evaluator** for a simple language called **E++**, focusing on arithmetic expressions involving rational numbers with unlimited precision. It incorporates parsing, symbolic evaluation, and storage of variables using key data structures and algorithms.
+A C++ implementation of **E++**, a simple expression language for evaluating fully parenthesized arithmetic expressions with variables and arbitrary-precision rational numbers.
+
+The project brings together expression parsing, tree-based evaluation, custom numeric types, symbol-table management, and stack-machine code generation.
 
 ## Overview
 
-The Expression Evaluator interprets and computes results from fully parenthesized infix arithmetic expressions, supports variables, and handles arbitrary-precision rational numbers. It constructs and evaluates expression trees, while managing variable assignments using a binary search tree (BST) as a symbol table.
+The evaluator processes E++ expressions, constructs an expression tree, and evaluates arithmetic operations using custom integer and rational-number representations. Variable values are stored in a Binary Search Tree (BST)-based symbol table.
 
-## Key Features
+## Features
 
-- **Support for Rational Arithmetic**  
-  Evaluates expressions with arbitrary-sized integers and rational numbers using custom `UnlimitedInt` and `UnlimitedRational` classes.
+- **Expression parsing:** Parses fully parenthesized infix expressions according to the E++ syntax.
+- **Expression-tree construction:** Represents expressions as trees for structured evaluation.
+- **Arbitrary-precision integers:** Implements a custom `UnlimitedInt` type rather than relying on fixed-width built-in integer types.
+- **Rational arithmetic:** Implements `UnlimitedRational` for arithmetic on rational values.
+- **Variable management:** Stores variable names and their evaluated values in a BST-based symbol table.
+- **Expression evaluation:** Evaluates expression trees recursively using the custom numeric types.
+- **Stack-machine code generation:** Includes a component for generating stack-machine instructions from expressions.
+- **Dynamic memory management:** Manages dynamically allocated data used by the project’s data structures and numeric representations.
 
-- **Expression Parsing and Tree Construction**  
-  Converts each E++ expression into a unique parse tree based on syntactic rules, ensuring structured evaluation.
+## E++ Language
 
-- **Expression Evaluation**  
-  Recursively evaluates expression trees, performing operations like addition, subtraction, multiplication, and division on `UnlimitedRational` values.
+E++ supports fully parenthesized infix arithmetic expressions with the following operators:
 
-- **Symbol Table Implementation**  
-  Maintains a symbol table using an unbalanced BST for mapping variables to their evaluated rational values.
+| Operator | Operation |
+|---|---|
+| `+` | Addition |
+| `-` | Subtraction |
+| `*` | Multiplication |
+| `/` | Division |
 
-## Expression Language (E++)
+Operands can be integer constants or variables that have already been declared. Variable assignments use the `:=` operator.
 
-- Fully parenthesized infix expressions with operators: `+`, `-`, `*`, `/`.
-- Operands may be constants or previously declared variables.
-- Each line is either a variable assignment (`x := expression`) or, in future extensions, a return statement.
-- Variables must be declared before use and are immutable once assigned.
+### Example
 
-### Examples of Valid Expressions
+```text
+x := (13 + (2 / (2 / 51)))
+y := ((x * 4) - (7 / 3))
+```
 
-- `((a + b))`
-- `((x * y) - z)`
-- `((5 + x) / (a + b))`
-- `(((x + y) * (a - b)) - (c / d))`
+## Main Components
 
-## Components
+### 1. `UnlimitedInt`
 
-### 1. UnlimitedInt
+A custom representation for integers that can exceed the range of built-in C++ integer types. It provides the integer operations needed by the evaluator.
 
-A class to represent integers of arbitrary size:
-- Handles all basic arithmetic operations.
-- Manages memory manually to support unlimited integer capacity.
+### 2. `UnlimitedRational`
 
-### 2. UnlimitedRational
+Represents rational values using integer numerator and denominator components. It builds on `UnlimitedInt` to support rational arithmetic and simplification.
 
-A class built on `UnlimitedInt`:
-- Represents rational numbers as `p/q` where `p` and `q` are coprime.
-- Supports arithmetic operations and rational simplification.
-- Special handling for division by zero and undefined values (`0/0`).
+### 3. Parser and Expression Trees
 
-### 3. Parser
-
-- Builds expression trees from tokenized input.
-- Ensures structure adheres to E++ grammar and rules.
+The parser processes E++ expressions and builds expression trees. The tree structure provides an explicit representation of the operations and operands in an expression.
 
 ### 4. Symbol Table
 
-- Implemented using a binary search tree.
-- Supports insertion, lookup, and deletion of variables.
+A Binary Search Tree (BST) maps variable names to their evaluated rational values. It supports the variable-management operations used during evaluation.
 
 ### 5. Evaluator
 
-- Orchestrates parsing and evaluation of expressions.
-- Stores parsed trees and variable values.
-- Ensures correct tree construction and evaluation logic.
+The evaluator traverses expression trees, applies arithmetic operations using `UnlimitedRational`, and resolves variable references through the symbol table.
 
-## Example Usage
-- x := `(13 + (2 / (2 / 51)))` 
-- y := `((x * 4) - (7 / 3))`
+### 6. Stack-Machine Code Generator
 
-These expressions are tokenized, parsed into trees, evaluated using `UnlimitedRational`, and stored in the symbol table.
+The project also includes a component for generating stack-machine instructions from parsed expressions.
 
-## Notes
+## Concepts Demonstrated
 
-- The evaluator expects syntactically correct input (as per E++ rules).
-- No built-in error handling for malformed expressions.
-- Designed to handle extremely large numbers without precision loss.
+- C++ and object-oriented programming
+- Data structures and tree-based symbol tables
+- Parsing and expression-tree construction
+- Recursive evaluation
+- Arbitrary-precision integer and rational arithmetic
+- Stack-machine code generation
+- Dynamic memory management
+
+## Project Context
+
+Developed as part of coursework under **Prof. Rahul Garg, CSE Department, IIT Delhi**.
+
+The project provided hands-on experience with the implementation of language-processing components, custom numeric representations, and core data structures in C++.
